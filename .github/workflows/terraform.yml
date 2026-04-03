@@ -29,3 +29,21 @@ jobs:
 
       # Format check (strict)
       - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      # Init
+      - name: Terraform Init
+        run: terraform init
+
+      # Validate
+      - name: Terraform Validate
+        run: terraform validate
+
+      # Plan
+      - name: Terraform Plan
+        run: terraform plan -input=false
+
+      # Apply (only on main branch)
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve -input=false
